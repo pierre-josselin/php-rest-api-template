@@ -1,0 +1,12 @@
+{
+    "name": "pierre-josselin/php-rest-api-template",
+    "description": "A simple REST API template for PHP.",
+    "authors": [
+        {
+            "name": "Pierre Josselin"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
