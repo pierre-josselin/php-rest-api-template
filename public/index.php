@@ -2,7 +2,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", 0);
 
-define("ROOT_DIRECTORY_PATH", str_replace(["/", "\\"], DIRECTORY_SEPARATOR, dirname(realpath(__FILE__), 2)));
+define("ROOT_DIRECTORY_PATH", dirname(realpath(__DIR__)));
 
 require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "vendor", "autoload.php"]));
 
