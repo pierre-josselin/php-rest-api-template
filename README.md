@@ -17,3 +17,15 @@ Install composer dependencies.
 ```
 composer install
 ```
+
+## Usage
+
+### Response
+
+```php
+$response = new \Core\Response();
+$response->setHttpResponseCode(200);
+$response->setHeader("Content-Type", "application/json");
+$response->setBody($body);
+$response->send();
+```
