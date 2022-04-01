@@ -2,12 +2,12 @@
 namespace Core;
 
 class Response {
-    private $httpResponseCode;
+    private $statusCode;
     private $headers = [];
     private $body;
 
-    public function getHttpResponseCode() {
-        return $this->httpResponseCode;
+    public function getStatusCode() {
+        return $this->statusCode;
     }
     public function getHeaders() {
         return $this->headers;
@@ -16,8 +16,8 @@ class Response {
         return $this->body;
     }
 
-    public function setHttpResponseCode(int $httpResponseCode) {
-        $this->httpResponseCode = $httpResponseCode;
+    public function setStatusCode(int $statusCode) {
+        $this->statusCode = $statusCode;
     }
     public function setHeaders(array $headers) {
         $this->headers = $headers;
@@ -36,7 +36,7 @@ class Response {
         foreach($this->getHeaders() as $name => $value) {
             header("{$name}: {$value}");
         }
-        http_response_code($this->getHttpResponseCode());
+        http_response_code($this->getStatusCode());
         echo($this->getBody());
         exit;
     }
