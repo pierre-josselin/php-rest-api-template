@@ -24,8 +24,8 @@ composer install
 
 ```php
 $response = new \Core\Response();
-$response->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
-$response->setHeader("Content-Type", "application/json");
-$response->setBody($body);
+$response->statusCode = \Core\HttpResponseStatusCodes::HTTP_OK;
+$response->headers["Content-Type"] = "application/json";
+$response->body = $body;
 $response->send();
 ```
