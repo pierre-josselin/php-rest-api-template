@@ -16,6 +16,8 @@ $dotenv->required("DEBUG")->isBoolean();
 
 ini_set("display_errors", intval(filter_var($_ENV["DEBUG"], FILTER_VALIDATE_BOOLEAN)));
 
+date_default_timezone_set("UTC");
+
 $router = new \Bramus\Router\Router();
 $router->setNamespace("\\API\\Controllers");
 require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "routes.php"]));
