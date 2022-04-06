@@ -6,7 +6,7 @@ A simple REST API template for PHP.
 
 ### Prerequisites
 
-- PHP
+- PHP (curl)
 - Apache (mod_rewrite)
 - Composer
 
@@ -26,6 +26,16 @@ composer install
 $response = new \Core\Response();
 $response->statusCode = \Core\HttpResponseStatusCodes::HTTP_OK;
 $response->headers["Content-Type"] = "application/json";
-$response->body = $body;
+$response->body = $json;
 $response->send();
+```
+
+### Request
+
+```php
+$request = new \Core\Request();
+$request->url = "http://example.com";
+$request->method = "GET";
+$response = $request->send();
+echo $response->body;
 ```
