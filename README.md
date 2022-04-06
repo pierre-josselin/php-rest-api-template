@@ -24,6 +24,10 @@ composer install
 
 [bramus/router](https://github.com/bramus/router)
 
+### Environment variables
+
+[PHP Dotenv](https://github.com/vlucas/phpdotenv)
+
 ### Response
 
 ```php
