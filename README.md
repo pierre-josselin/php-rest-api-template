@@ -47,3 +47,33 @@ $request->method = "GET";
 $response = $request->send();
 echo $response->body;
 ```
+
+### Model
+
+```php
+namespace API\Models;
+
+class User extends \Core\Model {
+    public string $firstName;
+    public string $lastName;
+}
+```
+
+### Controller
+
+```php
+namespace API\Controllers;
+
+class UserManager extends \Core\Controller {
+    public function index() {
+    }
+    public function store() {
+    }
+    public function show() {
+    }
+    public function update() {
+    }
+    public function destroy() {
+    }
+}
+```
