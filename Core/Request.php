@@ -4,10 +4,15 @@ namespace Core;
 class Request {
     public string $url;
     public string $method;
+    public array $query = [];
     public array $headers = [];
     public string $body;
     public bool $followRedirection;
     public int $timeout;
+
+    public function setParameter(string $name, $value) {
+        $this->query[$name] = $value;
+    }
 
     public function addHeader(string $name, string $value) {
         $this->headers[] = [$name, $value];
@@ -16,7 +21,17 @@ class Request {
     public function send() {
         $ch = curl_init();
         if(isset($this->url)) {
-            curl_setopt($ch, CURLOPT_URL, $this->url);
+            $url = $this->url;
+            if($this->query) {
+                $query = [];
+                $queryString = parse_url($url, PHP_URL_QUERY);
+                if(!is_null($queryString)) {
+                    parse_str($queryString, $query);
+                }
+                $query = array_merge($query, $this->query);
+                $url = strtok($url, "?") . "?" . http_build_query($query);
+            }
+            curl_setopt($ch, CURLOPT_URL, $url);
         }
         if(isset($this->method)) {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
