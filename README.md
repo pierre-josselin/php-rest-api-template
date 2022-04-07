@@ -33,8 +33,8 @@ composer install
 ```php
 $response = new \Core\Response();
 $response->statusCode = \Core\HttpResponseStatusCodes::HTTP_OK;
-$response->headers["Content-Type"] = "application/json";
-$response->body = $json;
+$response->addHeader("Content-Type", "application/json");
+$response->setJsonBody(["hello" => "world"]);
 $response->send();
 ```
 
