@@ -7,7 +7,7 @@ class Response {
     public string $body;
 
     public function addHeader(string $name, string $value) {
-        $this->headers[$name][] = $value;
+        $this->headers[strtolower($name)][] = $value;
     }
 
     public function setJsonBody($data) {
@@ -15,8 +15,8 @@ class Response {
     }
 
     public function send() {
-        foreach($this->headers as $name => $array) {
-            foreach($array as $value) {
+        foreach($this->headers as $name => $values) {
+            foreach($values as $value) {
                 header("{$name}: {$value}", false);
             }
         }

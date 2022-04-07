@@ -7,7 +7,7 @@ class Request {
     public array $query = [];
     public array $headers = [];
     public string $body;
-    public bool $followRedirection;
+    public bool $followRedirections;
     public int $timeout;
 
     public function setParameter(string $name, $value) {
@@ -15,7 +15,7 @@ class Request {
     }
 
     public function addHeader(string $name, string $value) {
-        $this->headers[] = [$name, $value];
+        $this->headers[strtolower($name)][] = $value;
     }
 
     public function send() {
@@ -38,16 +38,18 @@ class Request {
         }
         if($this->headers) {
             $headers = [];
-            foreach($this->headers as $header) {
-                $headers[] = "{$header[0]}: {$header[1]}";
+            foreach($this->headers as $name => $values) {
+                foreach($values as $value) {
+                    $headers[] = "{$name}: {$value}";
+                }
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
         if(isset($this->body)) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $this->body);
         }
-        if(isset($this->followRedirection)) {
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->followRedirection);
+        if(isset($this->followRedirections)) {
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->followRedirections);
         }
         if(isset($this->timeout)) {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
@@ -58,7 +60,7 @@ class Request {
             function($curl, $header) use (&$headers) {
                 $headerParts = explode(":", $header, 2);
                 if(count($headerParts) === 2) {
-                    $headers[trim($headerParts[0])][] = trim($headerParts[1]);
+                    $headers[strtolower(trim($headerParts[0]))][] = trim($headerParts[1]);
                 }
                 return strlen($header);
             }
