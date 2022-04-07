@@ -6,7 +6,7 @@ A simple REST API template for PHP.
 
 ### Prerequisites
 
-- PHP (curl)
+- PHP (curl) >= 7.4
 - Apache (mod_rewrite)
 - Composer
 
