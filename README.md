@@ -53,7 +53,7 @@ echo $response->body;
 ```php
 namespace API\Models;
 
-class User extends \Core\Model {
+class User {
     public string $firstName;
     public string $lastName;
 }
@@ -64,7 +64,7 @@ class User extends \Core\Model {
 ```php
 namespace API\Controllers;
 
-class UserManager extends \Core\Controller {
+class UserManager {
     public function index() {
     }
     public function store() {
