@@ -64,7 +64,7 @@ class User {
 ```php
 namespace API\Controllers;
 
-class UserManager {
+class UserController {
     public function index() {
     }
     public function store() {
