@@ -53,7 +53,8 @@ echo $response->body;
 ```php
 namespace API\Models;
 
-class User {
+class User
+{
     public string $firstName;
     public string $lastName;
 }
@@ -64,16 +65,26 @@ class User {
 ```php
 namespace API\Controllers;
 
-class UserController {
-    public function index() {
+class UserController
+{
+    public function index()
+    {
     }
-    public function store() {
+
+    public function store()
+    {
     }
-    public function show() {
+
+    public function show()
+    {
     }
-    public function update() {
+
+    public function update()
+    {
     }
-    public function destroy() {
+
+    public function destroy()
+    {
     }
 }
 ```
