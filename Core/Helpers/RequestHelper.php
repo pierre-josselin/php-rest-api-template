@@ -1,8 +1,8 @@
 <?php
 
-namespace Core;
+namespace Core\Helpers;
 
-class Request
+class RequestHelper
 {
     public string $url;
     public string $method;
@@ -74,7 +74,7 @@ class Request
         );
 
         $headers = [];
-        $response = new Request\Response();
+        $response = new RequestHelper\Response();
         $response->body = curl_exec($ch);
         $response->statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response->error = $response->statusCode >= 400;

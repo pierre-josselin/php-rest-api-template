@@ -38,16 +38,6 @@ $response->setJsonBody(["hello" => "world"]);
 $response->send();
 ```
 
-### Request
-
-```php
-$request = new \Core\Request();
-$request->url = "http://example.com";
-$request->method = "GET";
-$response = $request->send();
-echo $response->body;
-```
-
 ### Model
 
 ```php
@@ -87,4 +77,16 @@ class UserController
     {
     }
 }
+```
+
+### Helpers
+
+#### Request
+
+```php
+$request = new \Core\Helpers\RequestHelper();
+$request->url = "http://example.com";
+$request->method = "GET";
+$response = $request->send();
+echo $response->body;
 ```
