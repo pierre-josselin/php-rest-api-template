@@ -12,6 +12,12 @@ A simple REST API template for PHP.
 
 ### Installation
 
+Clone the repository.
+
+```
+git clone https://github.com/pierre-josselin/php-rest-api-template.git
+```
+
 Install composer dependencies.
 
 ```
