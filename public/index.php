@@ -20,5 +20,5 @@ date_default_timezone_set("UTC");
 
 $router = new Bramus\Router\Router();
 $router->setNamespace("\\API\\Controllers");
-require(ROOT_DIRECTORY_PATH . DIRECTORY_SEPARATOR . "routes.php");
+require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "routes", "api.php"]));
 $router->run();
