@@ -39,7 +39,7 @@ composer install
 ```php
 $response = new \Core\Response();
 $response->statusCode = \Core\HttpResponseStatusCodes::HTTP_OK;
-$response->addHeader("Content-Type", "application/json");
+$response->setHeader("Content-Type", "application/json");
 $response->setJsonBody(["hello" => "world"]);
 $response->send();
 ```

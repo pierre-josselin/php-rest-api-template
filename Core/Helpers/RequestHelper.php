@@ -12,14 +12,9 @@ class RequestHelper
     public bool $followRedirections;
     public int $timeout;
 
-    public function setQueryParameter(string $name, $value)
+    public function setHeader(string $name, string $value)
     {
-        $this->query[$name] = $value;
-    }
-
-    public function addHeader(string $name, string $value)
-    {
-        $this->headers[strtolower($name)][] = $value;
+        $this->headers[strtolower($name)] = $value;
     }
 
     public function send()
@@ -43,10 +38,8 @@ class RequestHelper
         }
         if ($this->headers) {
             $headers = [];
-            foreach ($this->headers as $name => $values) {
-                foreach ($values as $value) {
-                    $headers[] = "{$name}: {$value}";
-                }
+            foreach ($this->headers as $name => $value) {
+                $headers[] = "{$name}: {$value}";
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
@@ -67,7 +60,7 @@ class RequestHelper
             function ($curl, $header) use (&$headers) {
                 $headerParts = explode(":", $header, 2);
                 if (count($headerParts) === 2) {
-                    $headers[strtolower(trim($headerParts[0]))][] = trim($headerParts[1]);
+                    $headers[strtolower(trim($headerParts[0]))] = trim($headerParts[1]);
                 }
                 return strlen($header);
             }

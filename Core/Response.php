@@ -8,9 +8,9 @@ class Response
     public array $headers = [];
     public string $body;
 
-    public function addHeader(string $name, string $value)
+    public function setHeader(string $name, string $value)
     {
-        $this->headers[strtolower($name)][] = $value;
+        $this->headers[strtolower($name)] = $value;
     }
 
     public function setJsonBody($data)
@@ -20,10 +20,8 @@ class Response
 
     public function send()
     {
-        foreach ($this->headers as $name => $values) {
-            foreach ($values as $value) {
-                header("{$name}: {$value}", false);
-            }
+        foreach ($this->headers as $name => $value) {
+            header("{$name}: {$value}");
         }
         if (isset($this->statusCode)) {
             http_response_code($this->statusCode);
