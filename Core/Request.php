@@ -10,7 +10,7 @@ class Request {
     public bool $followRedirections;
     public int $timeout;
 
-    public function setParameter(string $name, $value) {
+    public function setQueryParameter(string $name, $value) {
         $this->query[$name] = $value;
     }
 
