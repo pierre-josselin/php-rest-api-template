@@ -38,7 +38,7 @@ composer install
 
 ```php
 $response = new \Core\Response();
-$response->statusCode = \Core\HttpResponseStatusCodes::HTTP_OK;
+$response->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
 $response->setHeader("Content-Type", "application/json");
 $response->setJsonBody(["hello" => "world"]);
 $response->send();
@@ -51,8 +51,8 @@ namespace API\Models;
 
 class User
 {
-    public string $firstName;
-    public string $lastName;
+    private string $firstName;
+    private string $lastName;
 }
 ```
 
@@ -90,9 +90,9 @@ class UserController
 #### Request
 
 ```php
-$request = new \Core\Helpers\RequestHelper();
-$request->url = "http://example.com";
-$request->method = "GET";
-$response = $request->send();
-echo $response->body;
+$requestHelper = new \Core\Helpers\RequestHelper();
+$requestHelper->setUrl("http://example.com");
+$requestHelper->setMethod("GET");
+$response = $requestHelper->send();
+echo $response->getBody();
 ```

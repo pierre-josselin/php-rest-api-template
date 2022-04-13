@@ -4,21 +4,19 @@ namespace Core;
 
 class Request
 {
-    public string $path;
-    public string $method;
-    public array $query = [];
-    public array $headers = [];
-    public string $body;
+    private string $method;
+    private string $path;
+    private array $urlQuery = [];
+    private array $headers = [];
+    private string $body;
 
     public function __construct()
     {
-        $this->path = strtok($_SERVER["REQUEST_URI"], "?");
-        $this->method = $_SERVER["REQUEST_METHOD"];
+        $this->method = strtoupper($_SERVER["REQUEST_METHOD"]);
+        $this->path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
         $this->body = file_get_contents("php://input");
 
-        if ($_SERVER["QUERY_STRING"]) {
-            parse_str($_SERVER["QUERY_STRING"], $this->query);
-        }
+        parse_str($_SERVER["QUERY_STRING"], $this->urlQuery);
 
         $headers = getallheaders();
         if ($headers) {
@@ -28,19 +26,38 @@ class Request
         }
     }
 
-    public function getDecodedQueryStringBody()
+    public function getMethod(): string
     {
-        $array = null;
-        parse_str($this->body, $array);
-        return $array;
+        return $this->method;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function getUrlQueryParameter(string $name)
+    {
+        return array_key_exists($name, $this->urlQuery) ? $this->urlQuery[$name] : null;
+    }
+
+    public function getHeader(string $name): ?string
+    {
+        $name = strtolower($name);
+        return array_key_exists($name, $this->headers) ? $this->headers[$name] : null;
+    }
+
+    public function getBody(): string
+    {
+        return $this->body;
     }
 
     public function getDecodedJsonBody()
     {
-        $array = @json_decode($this->body, true);
+        $data = @json_decode($this->body, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return null;
         }
-        return $array;
+        return $data;
     }
 }

@@ -4,8 +4,8 @@ namespace Core;
 
 class Autoloader
 {
-    public static function autoload(string $className)
+    public static function autoload(string $className): void
     {
-        require(ROOT_DIRECTORY_PATH . DIRECTORY_SEPARATOR . str_replace("\\", DIRECTORY_SEPARATOR, $className) . ".php");
+        require(implode(DIRECTORY_SEPARATOR, array_merge([ROOT_DIRECTORY_PATH], explode("\\", $className))) . ".php");
     }
 }

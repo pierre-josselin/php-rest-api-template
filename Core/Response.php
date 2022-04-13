@@ -4,21 +4,31 @@ namespace Core;
 
 class Response
 {
-    public int $statusCode;
-    public array $headers = [];
-    public string $body;
+    private int $statusCode;
+    private array $headers = [];
+    private string $body;
 
-    public function setHeader(string $name, string $value)
+    public function setStatusCode(int $statusCode): void
+    {
+        $this->statusCode = $statusCode;
+    }
+
+    public function setHeader(string $name, string $value): void
     {
         $this->headers[strtolower($name)] = $value;
     }
 
-    public function setJsonBody($data)
+    public function setBody($body): void
+    {
+        $this->body = $body;
+    }
+
+    public function setJsonBody($data): void
     {
         $this->body = json_encode($data);
     }
 
-    public function send()
+    public function send(): void
     {
         foreach ($this->headers as $name => $value) {
             header("{$name}: {$value}");

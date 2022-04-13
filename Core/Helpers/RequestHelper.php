@@ -4,37 +4,72 @@ namespace Core\Helpers;
 
 class RequestHelper
 {
-    public string $url;
-    public string $method;
-    public array $query = [];
-    public array $headers = [];
-    public string $body;
-    public bool $followRedirections;
-    public int $timeout;
+    private string $method;
+    private string $url;
+    private array $urlQuery = [];
+    private array $headers = [];
+    private string $body;
+    private bool $followRedirections;
+    private int $timeout;
+
+    public function setMethod(string $method): void
+    {
+        $this->method = strtoupper($method);
+    }
+
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
+    }
+
+    public function setUrlQueryParameter(string $name, $value): void
+    {
+        $this->urlQuery[$name] = $value;
+    }
 
     public function setHeader(string $name, string $value)
     {
         $this->headers[strtolower($name)] = $value;
     }
 
-    public function send()
+    public function setBody(string $body): void
+    {
+        $this->body = $body;
+    }
+
+    public function setJsonBody($data): void
+    {
+        $this->body = json_encode($data);
+    }
+
+    public function setFollowRedirections(bool $followRedirections): void
+    {
+        $this->followRedirections = $followRedirections;
+    }
+
+    public function setTimeout(int $timeout): void
+    {
+        $this->timeout = $timeout;
+    }
+
+    public function send(): RequestHelper\Response
     {
         $ch = curl_init();
-        if (isset($this->url)) {
-            $url = $this->url;
-            if ($this->query) {
-                $query = [];
-                $queryString = parse_url($url, PHP_URL_QUERY);
-                if (!is_null($queryString)) {
-                    parse_str($queryString, $query);
-                }
-                $query = array_merge($query, $this->query);
-                $url = strtok($url, "?") . "?" . http_build_query($query);
-            }
-            curl_setopt($ch, CURLOPT_URL, $url);
-        }
         if (isset($this->method)) {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
+        }
+        if (isset($this->url)) {
+            $url = $this->url;
+            if ($this->urlQuery) {
+                $urlQuery = [];
+                $urlQueryString = parse_url($url, PHP_URL_QUERY);
+                if (!is_null($urlQueryString)) {
+                    parse_str($urlQueryString, $urlQuery);
+                }
+                $urlQuery = array_merge($urlQuery, $this->urlQuery);
+                $url = strtok($url, "?") . "?" . http_build_query($urlQuery);
+            }
+            curl_setopt($ch, CURLOPT_URL, $url);
         }
         if ($this->headers) {
             $headers = [];
@@ -67,11 +102,9 @@ class RequestHelper
         );
 
         $headers = [];
-        $response = new RequestHelper\Response();
-        $response->body = curl_exec($ch);
-        $response->statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response->error = $response->statusCode >= 400;
-        $response->headers = $headers;
-        return $response;
+        $body = curl_exec($ch);
+        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = $statusCode == 0 || $statusCode >= 400;
+        return new RequestHelper\Response($error, $statusCode, $headers, $body);
     }
 }
