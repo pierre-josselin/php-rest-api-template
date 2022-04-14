@@ -2,7 +2,7 @@
 
 final class API
 {
-    use Core\Traits\NonInstantiableClass;
+    use Core\Traits\NonInstantiable;
 
     private static Bramus\Router\Router $router;
     private static Core\Request $request;

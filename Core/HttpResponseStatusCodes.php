@@ -4,7 +4,7 @@ namespace Core;
 
 final class HttpResponseStatusCodes
 {
-    use Traits\NonInstantiableClass;
+    use Traits\NonInstantiable;
 
     # Information responses
     const HTTP_CONTINUE = 100;

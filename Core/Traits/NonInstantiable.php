@@ -2,7 +2,7 @@
 
 namespace Core\Traits;
 
-trait NonInstantiableClass
+trait NonInstantiable
 {
     public function __construct()
     {
