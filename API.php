@@ -2,13 +2,11 @@
 
 final class API
 {
+    use Core\Traits\NonInstantiableClass;
+
     private static Bramus\Router\Router $router;
     private static Core\Request $request;
     private static Core\Response $response;
-
-    private function __construct()
-    {
-    }
 
     public static function init(): void
     {

@@ -4,6 +4,8 @@ namespace Core;
 
 final class HttpResponseStatusCodes
 {
+    use Traits\NonInstantiableClass;
+
     # Information responses
     const HTTP_CONTINUE = 100;
     const HTTP_SWITCHING_PROTOCOLS = 101;
