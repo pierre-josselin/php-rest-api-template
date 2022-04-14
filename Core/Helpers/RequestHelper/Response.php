@@ -2,7 +2,7 @@
 
 namespace Core\Helpers\RequestHelper;
 
-class Response
+final class Response
 {
     private bool $error;
     private int $statusCode;

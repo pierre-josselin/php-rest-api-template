@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Autoloader
+final class Autoloader
 {
     public static function autoload(string $className): void
     {

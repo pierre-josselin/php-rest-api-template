@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class HttpResponseStatusCodes
+final class HttpResponseStatusCodes
 {
     # Information responses
     const HTTP_CONTINUE = 100;

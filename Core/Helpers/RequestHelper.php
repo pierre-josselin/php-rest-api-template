@@ -2,7 +2,7 @@
 
 namespace Core\Helpers;
 
-class RequestHelper
+final class RequestHelper
 {
     private string $method;
     private string $url;

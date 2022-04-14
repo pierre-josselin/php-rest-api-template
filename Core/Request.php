@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Request
+final class Request
 {
     private string $method;
     private string $path;

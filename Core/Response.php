@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Response
+final class Response
 {
     private int $statusCode;
     private array $headers = [];
