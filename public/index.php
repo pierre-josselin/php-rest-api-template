@@ -18,9 +18,8 @@ ini_set("display_errors", intval(filter_var($_ENV["DEBUG"], FILTER_VALIDATE_BOOL
 
 date_default_timezone_set("UTC");
 
-$request = new Core\Request();
+API::init();
 
-$router = new Bramus\Router\Router();
-$router->setNamespace("\\API\\Controllers");
+API::router()->setNamespace("\\API\\Controllers");
 require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "routes", "api.php"]));
-$router->run();
+API::router()->run();

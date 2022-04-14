@@ -37,11 +37,10 @@ composer install
 ### Response
 
 ```php
-$response = new \Core\Response();
-$response->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
-$response->setHeader("Content-Type", "application/json");
-$response->setJsonBody(["hello" => "world"]);
-$response->send();
+API::response()->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
+API::response()->setHeader("Content-Type", "application/json");
+API::response()->setJsonBody(["hello" => "world"]);
+API::response()->send();
 ```
 
 ### Model

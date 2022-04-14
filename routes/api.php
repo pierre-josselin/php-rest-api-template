@@ -1,3 +1,3 @@
 <?php
-$router->mount("/api", function () use ($router) {
+API::router()->mount("/api", function () {
 });
