@@ -2,7 +2,7 @@
 
 A simple REST API template for PHP.
 
-Follows many conventions such as object-oriented programming, model-~~view~~-controller structure, use of CRUD managers, mutator methods...
+Follows many conventions such as object-oriented programming, model-~~view~~-controller structure, use of CRUD managers...
 
 ## Getting started
 
@@ -87,28 +87,12 @@ cp .env.example .env
 ```php
 namespace API\Models;
 
-class User
+use Core\Model;
+
+class User extends Model
 {
-    private string $firstName;
-    private string $lastName;
-
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
+    public string $firstName;
+    public string $lastName;
 }
 ```
 
@@ -118,8 +102,9 @@ class User
 namespace API\Controllers;
 
 use Core\API;
+use Core\Controller;
 
-class UserController
+class UserController extends Controller
 {
     public function index(): void
     {
@@ -149,14 +134,15 @@ class UserController
 namespace API\Managers;
 
 use API\Models\User;
+use Core\Manager;
 
-class UserManager
+class UserManager extends Manager
 {
     public function create(User $user): bool
     {
     }
 
-    public function read(): User
+    public function read(string $id): User
     {
     }
 
