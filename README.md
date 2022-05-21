@@ -10,6 +10,39 @@ A simple REST API template for PHP.
 - Apache (mod_rewrite)
 - Composer
 
+### Apache configuration
+
+> The following commands are intended for Debian 10 and may have to be adapted if you are using a different operating system.
+
+Create a new Apache configuration file
+
+/etc/apache2/sites-available/example.com.conf
+
+```
+<VirtualHost *:80>
+    ServerName example.com
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/example.com/public
+    ErrorLog /var/www/example.com/logs/error.log
+    CustomLog /var/www/example.com/logs/access.log combined
+</VirtualHost>
+<Directory /var/www/example.com/public>
+    AllowOverride All
+</Directory>
+```
+
+Activate the site
+
+```
+sudo a2ensite example.com
+```
+
+Restart Apache
+
+```
+sudo service apache2 restart
+```
+
 ### Installation
 
 Clone the repository.
