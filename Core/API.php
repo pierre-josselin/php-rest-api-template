@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\API;
+namespace Core;
 
 use Bramus\Router\Router;
 use Core\Request;
