@@ -1,6 +1,6 @@
 # PHP REST API template
 
-A simple REST API template for PHP.
+A simple MVC object-oriented REST API template for PHP.
 
 ## Getting started
 
@@ -14,7 +14,7 @@ A simple REST API template for PHP.
 
 > The following commands are intended for Debian 10 and may have to be adapted if you are using a different operating system.
 
-Create a new Apache configuration file
+Create a new Apache configuration file:
 
 /etc/apache2/sites-available/example.com.conf
 
@@ -31,13 +31,13 @@ Create a new Apache configuration file
 </Directory>
 ```
 
-Activate the site
+Activate the site:
 
 ```
 sudo a2ensite example.com
 ```
 
-Restart Apache
+Restart Apache:
 
 ```
 sudo service apache2 restart
@@ -45,38 +45,42 @@ sudo service apache2 restart
 
 ### Installation
 
-Clone the repository.
+Clone the repository:
 
 ```
 git clone https://github.com/pierre-josselin/php-rest-api-template.git
 ```
 
-Install composer dependencies.
+Rename and access the cloned repository:
+
+```
+mv php-rest-api-template example.com
+cd example.com
+```
+
+Install composer dependencies:
 
 ```
 composer install
 ```
 
+Create a dotenv file:
+
+```
+cp .env.example .env
+```
+
 ## Usage
+
+### Environment variables
+
+[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)
 
 ### Router
 
 [bramus/router](https://github.com/bramus/router)
 
-### Environment variables
-
-[PHP Dotenv](https://github.com/vlucas/phpdotenv)
-
-### Response
-
-```php
-API::response()->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
-API::response()->setHeader("Content-Type", "application/json");
-API::response()->setJsonBody(["hello" => "world"]);
-API::response()->send();
-```
-
-### Model
+### Models
 
 ```php
 namespace API\Models;
@@ -85,36 +89,92 @@ class User
 {
     private string $firstName;
     private string $lastName;
+
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
 }
 ```
 
-### Controller
+### Controllers
 
 ```php
 namespace API\Controllers;
 
+use API;
+
 class UserController
 {
-    public function index()
+    public function index(): void
     {
     }
 
-    public function store()
+    public function store(): void
     {
     }
 
-    public function show()
+    public function show(): void
     {
     }
 
-    public function update()
+    public function update(): void
     {
     }
 
-    public function destroy()
+    public function destroy(): void
     {
     }
 }
+```
+
+### Managers
+
+```php
+namespace API\Managers;
+
+use API\Models\User;
+
+class UserManager
+{
+    public function create(User $user): bool
+    {
+    }
+
+    public function read(): User
+    {
+    }
+
+    public function update(User $user): bool
+    {
+    }
+
+    public function delete(User $user): bool
+    {
+    }
+}
+```
+
+### Response
+
+```php
+API::response()->setStatusCode(\Core\HttpResponseStatusCodes::HTTP_OK);
+API::response()->setHeader("Content-Type", "application/json");
+API::response()->setJsonBody(["hello" => "world"]);
+API::response()->send();
 ```
 
 ### Helpers
