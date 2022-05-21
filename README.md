@@ -115,7 +115,7 @@ class User
 ```php
 namespace API\Controllers;
 
-use API;
+use Core\API;
 
 class UserController
 {
