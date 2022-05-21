@@ -1,6 +1,8 @@
 # PHP REST API template
 
-A simple MVC object-oriented REST API template for PHP.
+A simple REST API template for PHP.
+
+Follows many conventions such as object-oriented programming, model-~~view~~-controller structure, use of CRUD managers, mutator methods...
 
 ## Getting started
 
