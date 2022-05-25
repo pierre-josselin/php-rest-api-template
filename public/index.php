@@ -25,4 +25,12 @@ API::init();
 
 API::router()->setNamespace("\\API\\Controllers");
 require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "routes", "api.php"]));
+
+$pattern = implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "init", "*.php"]);
+$files = glob($pattern);
+
+foreach ($files as $file) {
+    require($file);
+}
+
 API::router()->run();

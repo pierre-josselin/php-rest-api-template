@@ -1,4 +1,6 @@
-/vendor/
+/init/*
+!/init/.gitkeep
 /logs/*
 !/logs/.gitkeep
+/vendor/
 .env
