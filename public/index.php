@@ -23,7 +23,7 @@ date_default_timezone_set("UTC");
 
 API::init();
 
-API::router()->setNamespace("\\API\\Controllers");
+API::router()->setNamespace("\\API");
 require(implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "routes", "api.php"]));
 
 $pattern = implode(DIRECTORY_SEPARATOR, [ROOT_DIRECTORY_PATH, "init", "*.php"]);
