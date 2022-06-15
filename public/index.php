@@ -15,9 +15,14 @@ spl_autoload_register([Core\Autoloader::class, "autoload"]);
 
 $dotenv = Dotenv\Dotenv::createImmutable(ROOT_DIRECTORY_PATH);
 $dotenv->load();
-$dotenv->required("DEBUG")->isBoolean();
+$dotenv->required("ENVIRONMENT")->allowedValues(["development", "production"]);
+$dotenv->required("SHOW_ERRORS")->isBoolean();
 
-ini_set("display_errors", intval(filter_var($_ENV["DEBUG"], FILTER_VALIDATE_BOOLEAN)));
+define("ENVIRONMENT", $_ENV["ENVIRONMENT"]);
+define("DEVELOPMENT", ENVIRONMENT === "development");
+define("PRODUCTION", ENVIRONMENT === "production");
+
+ini_set("display_errors", intval(filter_var($_ENV["SHOW_ERRORS"], FILTER_VALIDATE_BOOLEAN)));
 
 date_default_timezone_set("UTC");
 
