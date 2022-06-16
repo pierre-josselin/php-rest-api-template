@@ -36,9 +36,9 @@ final class Response
         $this->body = $body;
     }
 
-    public function setJsonBody($data): void
+    public function setJsonBody($data, int $flags = 0): void
     {
-        $this->body = json_encode($data);
+        $this->body = json_encode($data, $flags);
     }
 
     public function send(): void
